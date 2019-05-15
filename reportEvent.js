@@ -1,7 +1,13 @@
+/*
+ * @Author: shiweihua 
+ * @Date: 2019-05-14 16:21:29 
+ * @Last Modified by: shiweihua
+ * @Last Modified time: 2019-05-15 15:12:40
+ */
 (function (w) {
 
   //上报事件的地址
-  const REPORT_EVENT_URL = 'url';
+  const REPORT_EVENT_URL = '';
   //唯一ID
   var EVENTFRONTUVID = null;
 
@@ -97,7 +103,7 @@
         }
       })
     },
-    //获取元素属性，掉用上报事件
+    //获取元素属性，调用上报事件
     getDomeAttribute: function (dome) {
       //获取属性参数
       let eventData = dome.getAttribute('data-reporteventdata');
