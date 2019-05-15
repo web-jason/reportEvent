@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>上报事件</title>
+</head>
+<body>
+
+  <div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'>上报事件</div>
+  <div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'>多事件上报</div>
+
+  <div onclick="reportEvent"></div>
+  <script src="./reportEvent.js"></script>
+  <script>
+    function reportEvent(){
+      window.reportEvent.reportEventFunc({code:1},(res)=>{
+        if(res == '200'){
+          console.log('上报事件完成')
+        }
+      })
+    }
+  </script>
+</body>
+</html>
