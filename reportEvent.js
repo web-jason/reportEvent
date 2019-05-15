@@ -2,14 +2,14 @@
  * @Author: shiweihua 
  * @Date: 2019-05-14 16:21:29 
  * @Last Modified by: shiweihua
- * @Last Modified time: 2019-05-15 15:12:40
+ * @Last Modified time: 2019-05-15 15:35:52
  */
 (function (w) {
 
   //上报事件的地址
-  const REPORT_EVENT_URL = '';
-  //唯一ID
-  var EVENTFRONTUVID = null;
+  const REPORT_EVENT_URL = 'url';
+  //唯一ID对应内存里的key
+  const EVENT_FRONT_UVID = 'eventFrontUvId';
 
   var reportEvent = {
     ajax: function (obj) {
@@ -67,15 +67,15 @@
     //对frontUvId逻辑处理
     getFrontUvId: function () {
       //读取本地存储的frontUvId
-      EVENTFRONTUVID = localStorage.getItem("eventFrontUvId");
+      let eventFrontUvId = localStorage.getItem(EVENT_FRONT_UVID);
       //有frontUvId就直接返回，没有重新生成，保存在本地，并返回
-      if (EVENTFRONTUVID === null) {
+      if (eventFrontUvId === null) {
         //生成新的frontUvId
-        EVENTFRONTUVID = this.creatfrontUvId4(32,16);
+        eventFrontUvId = this.creatfrontUvId4(32,16);
         //frontUvId存在本地
-        localStorage.setItem("eventFrontUvId", EVENTFRONTUVID);
+        localStorage.setItem(EVENT_FRONT_UVID, eventFrontUvId);
       }
-      return EVENTFRONTUVID;
+      return eventFrontUvId;
     },
     //过滤空参数 + 序列化对象
     serialize: function (obj) {
