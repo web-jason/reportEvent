@@ -10,7 +10,7 @@
 ## **自动绑定click事件，完成上报事件**
 
 Array循环多次上报，Object上报一次，并且需要JSON.stringify()<br/>
-**目前自动绑定只支持click上报**
+**目前自动绑定只做了click**
 
 ## PC or H5
 
