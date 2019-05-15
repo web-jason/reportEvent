@@ -15,8 +15,8 @@ Array循环多次上报，Object上报一次，并且需要JSON.stringify()<br/>
 ## PC or H5
 
 >Object：`<div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'></div>`
-<br/>
-Array：`<div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'></div>`
+><br/>
+>Array：`<div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'></div>`
 
 ## React
 
