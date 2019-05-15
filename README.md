@@ -16,16 +16,19 @@ Array循环多次上报，Object上报一次，并且需要JSON.stringify()<br/>
 
 >Object：`<div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'></div>`
 ><br/>
+><br/>
 >Array：`<div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'></div>`
 
 ## React
 
 >Object：`<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify({code:1,id:2})}></div>`
-<br/>
-Array：`<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify([{code:1,id:2},{code:1,id:2}])}></div>`
+><br/>
+><br/>
+>Array：`<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify([{code:1,id:2},{code:1,id:2}])}></div>`
 
 ## Vue
 
 >Object：`<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify({code:1,id:2})"></div>`
-<br/>
-Array：`<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify([{code:1,id:2},{code:1,id:2}])"></div>`
+><br/>
+><br/>
+>Array：`<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify([{code:1,id:2},{code:1,id:2}])"></div>`
