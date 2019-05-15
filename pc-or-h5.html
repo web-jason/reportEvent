@@ -11,10 +11,10 @@
   <div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'>上报事件</div>
   <div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'>多事件上报</div>
 
-  <div onclick="reportEvent"></div>
+  <div onclick="addEvent()">手动上报事件</div>
   <script src="./reportEvent.js"></script>
   <script>
-    function reportEvent(){
+    function addEvent(){
       window.reportEvent.reportEventFunc({code:1},(res)=>{
         if(res == '200'){
           console.log('上报事件完成')

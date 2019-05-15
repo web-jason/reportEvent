@@ -3,7 +3,7 @@
   //上报事件的地址
   const REPORT_EVENT_URL = 'url';
 
-  w.reportEvent = {
+  var reportEvent = {
     get: function(url, data, fn) {
       let xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
@@ -110,15 +110,16 @@
           if(Array.isArray(eventData)){
             for(let si=0; si<eventData.length; si++){
               //调用上报事件方法
-              w.reportEvent.reportEventFunc(eventData[si]);
+              reportEvent.reportEventFunc(eventData[si]);
             }
           }else{
-            w.reportEvent.reportEventFunc(eventData);
+            reportEvent.reportEventFunc(eventData);
           }
 
         }
       }
     };
   }
+  w.reportEvent = reportEvent;
 
 })(window)
