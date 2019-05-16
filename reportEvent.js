@@ -2,7 +2,7 @@
  * @Author: shiweihua 
  * @Date: 2019-05-14 16:21:29 
  * @Last Modified by: shiweihua
- * @Last Modified time: 2019-05-15 15:35:52
+ * @Last Modified time: 2019-05-16 16:05:30
  */
 (function (w) {
 
@@ -12,7 +12,7 @@
   const EVENT_FRONT_UVID = 'eventFrontUvId';
 
   var reportEvent = {
-    ajax: function (obj) {
+    _ajax: function (obj) {
       let xhr = new XMLHttpRequest();
       xhr.open(obj.type || 'POST', obj.url, true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -24,7 +24,7 @@
       xhr.send(obj.data);
     },
     //按条件循环方法，配合filterEmptyObj使用
-    each: function (data, callback) {
+    _each: function (data, callback) {
       for (let x in data) {
         let d = callback(x, data[x]);
         if (d === false) {
@@ -33,9 +33,9 @@
       }
     },
     //过滤空对象
-    filterEmptyObj: function (obj) {
+    _filterEmptyObj: function (obj) {
       let o = {};
-      this.each(obj, function (i, d) {
+      this._each(obj, function (i, d) {
         if (d !== null) {
           o[i] = d;
         }
@@ -43,7 +43,7 @@
       return o;
     },
     //用于生成frontUvId
-    creatfrontUvId4: function (len, radix) {
+    _creatfrontUvId4: function (len, radix) {
       var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
       var uuid = [], i;
       radix = radix || chars.length;
@@ -65,22 +65,22 @@
       return uuid.join('');
     },
     //对frontUvId逻辑处理
-    getFrontUvId: function () {
+    _getFrontUvId: function () {
       //读取本地存储的frontUvId
       let eventFrontUvId = localStorage.getItem(EVENT_FRONT_UVID);
       //有frontUvId就直接返回，没有重新生成，保存在本地，并返回
       if (eventFrontUvId === null) {
         //生成新的frontUvId
-        eventFrontUvId = this.creatfrontUvId4(32,16);
+        eventFrontUvId = this._creatfrontUvId4(32,16);
         //frontUvId存在本地
         localStorage.setItem(EVENT_FRONT_UVID, eventFrontUvId);
       }
       return eventFrontUvId;
     },
     //过滤空参数 + 序列化对象
-    serialize: function (obj) {
+    _serialize: function (obj) {
       //清空为null的对象
-      obj = this.filterEmptyObj(obj);
+      obj = this._filterEmptyObj(obj);
       //序列化参数
       let parameter = '?';
       for (let key in obj) {
@@ -92,11 +92,11 @@
     //上报事件方法
     reportEventFunc: function (obj, callback) {
       //拿frontUvId
-      obj.frontUvId = this.getFrontUvId();
+      obj.frontUvId = this._getFrontUvId();
       //post提交接口
-      this.ajax({
+      this._ajax({
         type: 'POST',
-        url: `${REPORT_EVENT_URL}${this.serialize(obj)}`,
+        url: `${REPORT_EVENT_URL}${this._serialize(obj)}`,
         data: {},
         callback: (res) => {
           callback && callback(res)
