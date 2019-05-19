@@ -2,14 +2,20 @@
  * @Author: shiweihua 
  * @Date: 2019-05-14 16:21:29 
  * @Last Modified by: shiweihua
- * @Last Modified time: 2019-05-19 10:09:42
+ * @Last Modified time: 2019-05-19 16:20:09
  */
 (function (w) {
 
-  //上报事件的地址
+  //上报事件的提交地址
   const REPORT_EVENT_URL = 'url';
   //唯一ID对应内存里的key
   const EVENT_FRONT_UVID = 'eventFrontUvId';
+  //事件委托的对象
+  var EVENT_DOM = document.getElementsByTagName("body")[0];
+  //上报事件的绑定类型对应的绑定名称
+  const REPORT_EVENT_FUNC = 'data-reporteventfunc';
+  //上报事件数据对应的绑定参数名称
+  const REPORT_EVENT_DATA = 'data-reporteventdata';
 
   var reportEvent = {
     _ajax: function (obj) {
@@ -106,33 +112,34 @@
     //获取元素属性，调用上报事件
     getDomAttribute: function (dom) {
       //获取属性参数
-      let eventData = dom.getAttribute('data-reporteventdata');
-      if (eventData) {
-        //判断类型，如果是字符串类型，转换类型
-        eventData = typeof eventData == 'string' ? eval('(' + eventData + ')') : JSON.parse(eventData);
-        //此判断es5写法，对兼容有要求的可以更换为 Object.prototype.toString.call(eventData) === '[object Array]'
-        //如果是数组，循环上报事件，如果是对象直接上报事件
-        if (Array.isArray(eventData)) {
-          for (let si = 0; si < eventData.length; si++) {
-            this.reportEventFunc(eventData[si]);
-          }
-        } else {
-          this.reportEventFunc(eventData);
-        }
+      let eventData = dom.getAttribute(REPORT_EVENT_DATA);
+      if (!eventData) {
+        return;
+      }
+      //判断类型，如果是字符串类型，转换类型
+      eventData = typeof eventData == 'string' ? eval('(' + eventData + ')') : JSON.parse(eventData);
+      //此判断es5写法，对兼容有要求的可以更换为 Object.prototype.toString.call(eventData) === '[object Array]'
+      //如果是对象直接上报事件
+      if (!Array.isArray(eventData)) {
+        this.reportEventFunc(eventData);
+        return;
+      }
+      //如果是数组，循环上报事件
+      for (let si = 0; si < eventData.length; si++) {
+        this.reportEventFunc(eventData[si]);
       }
     }
   }
 
 
   w.onload = function () {
-    let body = document.getElementsByTagName("body")[0];
 
     //事件委托，检测拥有指定参数
-    body.onclick = function (ev) {
+    EVENT_DOM.onclick = function (ev) {
       var ev = ev || w.event;
       //查找当前dom的dom树
       for (let i = 0; i < ev.path.length; i++) {
-        if (ev.path[i].getAttribute && ev.path[i].getAttribute('data-reporteventfunc') == 'click') {
+        if (ev.path[i].getAttribute && ev.path[i].getAttribute(REPORT_EVENT_FUNC) == 'click') {
           //只需要传入满足条件的节点
           reportEvent.getDomAttribute(ev.path[i]);
         }
