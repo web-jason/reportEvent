@@ -2,7 +2,7 @@
  * @Author: shiweihua 
  * @Date: 2019-05-14 16:21:29 
  * @Last Modified by: shiweihua
- * @Last Modified time: 2019-05-16 16:05:30
+ * @Last Modified time: 2019-05-19 10:09:42
  */
 (function (w) {
 
@@ -104,9 +104,9 @@
       })
     },
     //获取元素属性，调用上报事件
-    getDomeAttribute: function (dome) {
+    getDomAttribute: function (dom) {
       //获取属性参数
-      let eventData = dome.getAttribute('data-reporteventdata');
+      let eventData = dom.getAttribute('data-reporteventdata');
       if (eventData) {
         //判断类型，如果是字符串类型，转换类型
         eventData = typeof eventData == 'string' ? eval('(' + eventData + ')') : JSON.parse(eventData);
@@ -130,11 +130,11 @@
     //事件委托，检测拥有指定参数
     body.onclick = function (ev) {
       var ev = ev || w.event;
-      //查找当前dome的dome树
+      //查找当前dom的dom树
       for (let i = 0; i < ev.path.length; i++) {
         if (ev.path[i].getAttribute && ev.path[i].getAttribute('data-reporteventfunc') == 'click') {
           //只需要传入满足条件的节点
-          reportEvent.getDomeAttribute(ev.path[i]);
+          reportEvent.getDomAttribute(ev.path[i]);
         }
       }
     };
