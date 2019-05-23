@@ -9,7 +9,7 @@
 
 适用于路由切换、接口请求完毕、onload、接口或方法回调等场景。callback为非必填<br/>
 
-##### window.reportEvent.reportEventFunc(object,callback);
+### window.reportEvent.reportEventFunc(object,callback);
 
 > window.reportEvent.reportEventFunc({code:1,id:2},(res)=>{
 >   console.log('调用完成=>',res)
@@ -22,21 +22,21 @@
 
 ## PC or H5
 
-> 对象：
-> `<div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'></div>`
-> 数组：
+> 对象：<br/>
+> `<div data-reporteventfunc="click" data-reporteventdata='{"code":"1","id":"2"}'></div>`<br/>
+> 数组：<br/>
 > `<div data-reporteventfunc="click" data-reporteventdata='[{"code":"1","id":"2"},{"code":"1","id":"2"}]'></div>`
 
 ## React
 
-> 对象：
-> `<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify({code:1,id:2})}></div>`
-> 数组：
+> 对象：<br/>
+> `<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify({code:1,id:2})}></div>`<br/>
+> 数组：<br/>
 > `<div data-reporteventfunc={'click'} data-reporteventdata={JSON.stringify([{code:1,id:2},{code:1,id:2}])}></div>`
 
 ## Vue
 
-> 对象：
-> `<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify({code:1,id:2})"></div>`
-> 数组：
+> 对象：<br/>
+> `<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify({code:1,id:2})"></div>`<br/>
+> 数组：<br/>
 > `<div  data-reporteventfunc="click" :data-reporteventdata="JSON.stringify([{code:1,id:2},{code:1,id:2}])"></div>`
